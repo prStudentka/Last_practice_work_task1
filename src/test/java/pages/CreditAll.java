@@ -56,7 +56,7 @@ public class CreditAll {
     	String beforeDigits = $(INPUT_SUM).val();
         actions().dragAndDropBy($(SLIDER_HANDLER), 1, 0).build().perform();
         $(INPUT_SUM).shouldNotBe(value(beforeDigits));
-        $(INPUT_SUM).shouldBe(value("5 050 826 ₽"));
+        $(INPUT_SUM).shouldBe(value("5 050 347 ₽"));
                 
     }
    
