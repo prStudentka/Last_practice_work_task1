@@ -15,14 +15,19 @@ jobs:
             java-version: '23'
             distribution: 'temurin'
             architecture: x64
-            
+
+        - name: Selenoid
+          run: |
+                curl -s https://aerokube.com/cm/bash | bash
+                chmod +x ./cm | ./cm selenoid start --browsers 'chrome' --last-versions 1
+        
         - uses: actions/checkout@v4
         
         - name: Run script
           run: |
-                mvn -B --update-snapshots verify
-                mvn -B site:site
-                mvn -B allure:aggregate
+                mvn -B -ntp --update-snapshots verify
+                mvn -B -ntp site:site
+                mvn -B -ntp allure:aggregate
                 
         - name: Publish test report
           uses: peaceiris/actions-gh-pages@v3
