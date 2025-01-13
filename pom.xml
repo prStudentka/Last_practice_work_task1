@@ -91,7 +91,7 @@
     <version>3.3.0</version>
     <configuration>
       <includes>
-        <include>TestSiteMts.java</include>
+        <include>TestCredit.java</include>
       </includes>
     </configuration>
   </plugin>
