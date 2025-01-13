@@ -1,12 +1,9 @@
 package tests;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.condition.DisabledIf;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.api.Order;
 
 import pages.PremiumPackage;
 
@@ -54,6 +51,7 @@ public class TestPremium  extends TestSiteMts {
     }
     
     @Order(4)
+    @DisabledIf(value = "java.awt.GraphicsEnvironment#isHeadless", disabledReason = "headless environment")
     @DisplayName("Негативный тест проверки заполнения поля города")
     @ParameterizedTest(name= "Проверка валидации города-получателя ({0}, {4})")
     @CsvSource({
@@ -63,5 +61,12 @@ public class TestPremium  extends TestSiteMts {
     })
     public void checkValidateCityNegative(String description, String fio, String birth, String phone, String city) throws Exception {
     	premium.checkValidateCity(fio, birth, phone, city);
+    }
+
+    @Order(4)
+    @DisplayName("Негативный тест проверки заполнения поля ФИО пустым")
+    @Test
+    public void checkValidateFIONegative() throws Exception {
+        premium.checkValidateFIO("");
     }
 }

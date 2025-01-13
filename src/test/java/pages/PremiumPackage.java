@@ -20,7 +20,9 @@ public class PremiumPackage {
 	private static final SelenideElement VALIDATOR_AGE = $x("//div[contains(@class, 'DatePickerWrapper')]/following-sibling::div[@data-testid='text']");
 	private static final String EXPECTED_VALIDATOR_AGE_MESSAGE = "Возраст клиента должен быть не менее 18 лет";
 	private static final String EXPECTED_VALIDATOR_CITY_MESSAGE = "B данный город не выполняется доставка карты";
-	private static final SelenideElement CITY_LISTBOX = $x("//li[contains(@data-suggestion-index, '0')]");
+    private static final String EXPECTED_VALIDATOR_MESSAGE = "Поле обязательно для заполнения";
+    private static final SelenideElement VALIDATOR_MESSAGE_FIO = $x("//form//div[@class = 'Wrapper-sc-10uh1mr-0 xCWJp']/following-sibling::div[@data-testid='text']");
+    private static final SelenideElement CITY_LISTBOX = $x("//li[contains(@data-suggestion-index, '0')]");
 	private static final SelenideElement VALIDATOR_CITY = $x("//div[contains(@class, 'Wrapper-sc-10uh1mr-0')]/following-sibling::div[@data-testid='text']");
 	private static final SelenideElement BUTTON_SUBMIT = $x("//button[@data-testid='button']");
 	
@@ -68,4 +70,14 @@ public class PremiumPackage {
        actions().moveToElement($(CITY_FIELD)).sendKeys(Keys.BACK_SPACE).build().perform();
        $(VALIDATOR_CITY).shouldHave(Condition.text(EXPECTED_VALIDATOR_CITY_MESSAGE));
 	}
+
+    @Step("Проверка валидации ФИО на совершеннолетие")
+    public void checkValidateFIO(String fio) {
+        $(FIO_FIELD).clear();
+        $(FIO_FIELD).sendKeys(Keys.CONTROL + "A");
+        $(FIO_FIELD).sendKeys(Keys.BACK_SPACE);
+        actions().moveToElement($(PHONE_FIELD)).click().build().perform();
+        $(FIO_FIELD).sendKeys(fio);
+        $(VALIDATOR_MESSAGE_FIO).shouldHave(Condition.text(EXPECTED_VALIDATOR_MESSAGE));
+    }
 }
