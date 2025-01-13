@@ -20,9 +20,7 @@ jobs:
         
         - name: Run script
           run: |
-                mvn clean
-                mvn test
-                mvn site:site
+                mvn --batch-mode --update-snapshots verify
                 mvn allure:aggregate
                 
         - name: Publish test report
