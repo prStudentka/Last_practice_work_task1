@@ -98,6 +98,7 @@
     <configuration>
       <includes>
         <include>TestCredit.java</include>
+        <include>TestPremium.java</include>
       </includes>
     </configuration>
   </plugin>
